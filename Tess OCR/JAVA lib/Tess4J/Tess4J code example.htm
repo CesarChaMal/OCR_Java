@@ -1,0 +1,65 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0045)http://tess4j.sourceforge.net/codesample.html -->
+<HTML><HEAD><META content="IE=5.0000" http-equiv="X-UA-Compatible">
+     
+<META name="keywords" content="Unicode, OCR, Java, JNA, Tesseract">     
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">     
+<TITLE>Tess4J</TITLE>     <LINK href="Tess4J%20code%20example_files/vietunicode.css" 
+rel="stylesheet" type="text/css">     
+<SCRIPT src="Tess4J%20code%20example_files/jquery.min.js"></SCRIPT>
+     
+<SCRIPT src="Tess4J%20code%20example_files/vietunicode.js" type="text/javascript"></SCRIPT>
+     
+<SCRIPT type="text/javascript">
+        $(document).ready(function () {
+            equalHeight($(".column"));
+        });
+    </SCRIPT>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.17801"></HEAD> 
+<BODY bgcolor="#ffffff">
+<DIV class="column" id="leftcontent"><BR><A href="http://sourceforge.net/"><IMG 
+width="125" height="37" alt="SourceForge.net Logo" src="Tess4J%20code%20example_files/sflogo.png" 
+border="0"></A>         
+<UL class="menu">
+  <LI><A href="http://tess4j.sourceforge.net/">Home</A></LI>
+  <LI><A href="http://sourceforge.net/projects/tess4j/">Download</A></LI>
+  <LI><A href="http://tess4j.sourceforge.net/usage.html">Usage</A></LI>
+  <LI><A href="http://tess4j.sourceforge.net/codesample.html">Code 
+  Samples</A></LI>
+  <LI><A href="http://tess4j.sourceforge.net/changelog.html">Change Log</A></LI>
+  <LI><A 
+  href="http://tess4j.sourceforge.net/docs/index.html">Documentation</A></LI>
+  <LI><A href="http://sourceforge.net/projects/tess4j/forums">Feedback/<BR>      
+            Questions</A></LI></UL></DIV>
+<DIV class="column" id="content"><SPAN class="title">Tess4J</SPAN><BR><BR>
+<H3>Code Samples</H3>
+<P>            The following code example shows common usage of the library. 
+Make sure              <CODE>tessdata</CODE> folder are in the search path, and 
+the <CODE>.jar</CODE> files            are in the classpath.</P>
+<DIV style="margin: 20px; padding: 0px 15px; border: 1px solid rgb(192, 192, 192); border-image: none;">
+<PRE>package net.sourceforge.tess4j.example;
+
+import java.io.File;
+import net.sourceforge.tess4j.*;
+
+public class TesseractExample {
+
+    public static void main(String[] args) {
+        File imageFile = new File("eurotext.tif");
+        Tesseract instance = Tesseract.getInstance();  // JNA Interface Mapping
+        // Tesseract1 instance = new Tesseract1(); // JNA Direct Mapping
+
+        try {
+            String result = instance.doOCR(imageFile);
+            System.out.println(result);
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+}</PRE></DIV>
+<P>More can be found under <A href="http://sourceforge.net/p/tess4j/code/200/tree/Tess4J_3/trunk/test/net/sourceforge/tess4j/">UnitTest</A> 
+package.</P>
+<P>Tutorial: <A href="http://tess4j.sourceforge.net/tutorial/">Development with 
+Tess4J in NetBeans, Eclipse,             and 
+Command-line</A></P></DIV></BODY></HTML>

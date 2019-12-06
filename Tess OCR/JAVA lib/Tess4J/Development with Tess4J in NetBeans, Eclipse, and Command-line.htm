@@ -1,0 +1,113 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0039)http://tess4j.sourceforge.net/tutorial/ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><HTML 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><META content="IE=11.0000" 
+http-equiv="X-UA-Compatible">
+     
+<META name="keywords" content="Unicode, OCR, Java, JNA, Tesseract, Tess4J, 32-bit, 64-bit, JVM, NetBeans, Eclipse, Command-line, IDE, DLL"> 
+    
+<META http-equiv="Content-Type" 
+content="text/html; charset=utf-8"><TITLE>Development with Tess4J in NetBeans, 
+Eclipse, and Command-line</TITLE>     
+<STYLE type="text/css">
+        .style3
+        {
+            color: #FFFFFF;
+            background-color: #003366;
+        }
+        .style4
+        {
+            width: 859px;
+            height: 668px;
+        }
+        .style5
+        {
+            width: 787px;
+            height: 670px;
+        }
+        .style8
+        {
+            width: 800px;
+            height: 571px;
+        }
+    </STYLE>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.17801"></HEAD> 
+<BODY>
+<H1 style="text-align: center;">        Development with Tess4J</H1>
+<P>        Tesseract, Leptonica, and Ghostscript Windows 32- and 64-bit DLLs are 
+embedded in         <CODE>tess4j.jar</CODE>; they will automatically be 
+extracted and loaded at run-time.        For other platforms, be sure to install 
+or <A href="https://code.google.com/p/tesseract-ocr/wiki/ReadMe" 
+target="_self">build</A> Tesseract first.</P>
+<H2>        NetBeans</H2>
+<P>        Create a new <EM>Java Application</EM> project. In <EM>Projects</EM> 
+view, click        on <EM>Libraries</EM> node, and select <EM>Add 
+JAR/Folder</EM>.... Find and add        all the required JAR files, including 
+<CODE>jai_imageio.jar</CODE>, <CODE>jna.jar</CODE>,        and 
+<CODE>tess4j.jar</CODE>. Add a new <EM>Java Class</EM> file named 
+<CODE>TesseractExample</CODE>        with appropriate package name</P>
+<P><IMG class="style5" alt="NetBeans IDE" src="Development%20with%20Tess4J%20in%20NetBeans,%20Eclipse,%20and%20Command-line_files/NetBeans8.0.png"></P>
+<P>        Place <CODE>tessdata</CODE> and sample images at the project's root 
+directory.        If you select <EM>Files</EM> view, it should display as 
+follows:</P>
+<P><IMG alt="NetBeans Files view" src="Development%20with%20Tess4J%20in%20NetBeans,%20Eclipse,%20and%20Command-line_files/NetBeans2.png"></P>
+<P>        You can configure NetBeans to launch with a JDK 64-bit to run the 
+example; this        can be done by adjusting <CODE>netbeans_jdkhome</CODE> 
+value in <CODE>NetBeans\etc\netbeans.conf</CODE>        file.</P>
+<H2>        Eclipse</H2>
+<P>        Create a new project. In project's <EM>Properties</EM> window, select 
+<EM>Java Build            Path &gt; Add External JARs...</EM> and add the 
+required JARs: <CODE>jai_imageio.jar</CODE>,         <CODE>jna.jar</CODE>, and 
+<CODE>tess4j.jar</CODE>. Now add a new <EM>Class</EM>        named 
+<CODE>TesseractExample</CODE> as shown. Place <CODE>tessdata</CODE>, and sample  
+      images in the project's root directory.</P>
+<P><IMG class="style4" alt="Eclipse IDE" src="Development%20with%20Tess4J%20in%20NetBeans,%20Eclipse,%20and%20Command-line_files/Eclipse.png"></P>
+<P>        To run with a JVM 64-bit, configure Eclipse to launch with an 
+Alternate JRE 64-bit        to run the example.</P>
+<P><IMG class="style8" alt="Eclipse Configuration" src="Development%20with%20Tess4J%20in%20NetBeans,%20Eclipse,%20and%20Command-line_files/Eclipse-RunConfigurations.png"></P>
+<H2>        Command-line on Windows 7 64-bit</H2>
+<P>        Create a working directory with content and structure as below. Place 
+all the dependent        JAR files in <CODE>lib</CODE> subdirectory.</P>
+<P><IMG alt="Command-line example" src="Development%20with%20Tess4J%20in%20NetBeans,%20Eclipse,%20and%20Command-line_files/commandline1.png"></P>
+<P>        Create a Java source file <CODE>TesseractExample.java</CODE> in the 
+appropriate        directory.</P>
+<P><IMG class="style6" alt="Command-line example" src="Development%20with%20Tess4J%20in%20NetBeans,%20Eclipse,%20and%20Command-line_files/commandline2.png"></P>
+<P>        Type <CODE>%windir%\SysWoW64\cmd</CODE> in Start Search box to open a 
+32-bit command        prompt. Navigate to the project directory and execute the 
+following commands:</P>
+<P class="style3">        C:\Projects\TessExample&gt;javac -cp lib\* 
+tess4j\example\TesseractExample.java<BR><BR>        
+C:\Projects\TessExample&gt;java -cp lib\*;. tess4j.example.TesseractExample<SPAN 
+class="style3"><BR>            The (quick) [brown] {fox} jumps!<BR>            
+Over the $43,456.78             <lazy> #90 dog<BR>        &amp; duck/goose, as 
+12.5% of E-mail<BR>        from aspammer@website.com is spam.<BR>            
+...</lazy></SPAN></P>
+<P>        If you want to use your customized version of the DLLs, you will need 
+to make your        target library available to your Java program by setting the 
+<CODE>jna.library.path</CODE>        system property or changing the appropriate 
+library access environment variable        before launching the VM (see <A href="https://github.com/twall/jna/blob/master/www/GettingStarted.md" 
+target="_blank">Getting Started with JNA</A>).     </P>
+<PRE>package tess4j.example;
+
+import java.io.File;
+import net.sourceforge.tess4j.*;
+
+public class TesseractExample {
+    public static void main(String[] args) {
+        System.setProperty("jna.library.path", "32".equals(System.getProperty("sun.arch.data.model")) ? "lib/win32-x86" : "lib/win32-x86-64");
+
+        File imageFile = new File("eurotext.tif");
+        Tesseract instance = Tesseract.getInstance();  // JNA Interface Mapping
+        // Tesseract1 instance = new Tesseract1(); // JNA Direct Mapping
+        // File tessDataFolder = LoadLibs.extractTessResources("tessdata"); // Maven build bundles English data
+        // instance.setDatapath(tessDataFolder.getAbsolutePath());
+
+        try {
+            String result = instance.doOCR(imageFile);
+            System.out.println(result);
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+}</PRE></BODY></HTML>
